@@ -7,7 +7,7 @@ from . import forms # connect to the from
 # Create your views here.
 class SignUp(CreateView):
     # the view where users can create new accounts
-    form = froms.UserCreateForm # form connection
+    form_class = froms.UserCreateForm # form connection
     success_url = reverse_lazy('login')
     # if successful transfer to the login page
     #template connection
