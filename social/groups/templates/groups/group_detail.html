@@ -1,0 +1,41 @@
+{% extends from 'group/group_base.html' %}
+
+{% block pregroup %}
+<!-- before the group show the current group information - linked and found in
+group model -  whoch is linked to the class based views -->
+<h1>{{group.name}}</h1>
+<h2>member count: {{group.members.count}}</h2>
+<!-- give option to leave or join the group button, if the user is a loged in
+and if the user is a member or not -->
+
+<div class="content">
+  {% if user in group.members.all %}
+  <!-- if the user in the group's member list(attribute of group model) -->
+  <a href="{%url 'groups:leave' slug=group.slug %}"
+  class='btn btn-lg btn-fill btn-warning'>Leave Group</a>
+  <!-- page not done however, will be done in the urls.py -->
+  {% else %}
+  <a href="{%url 'groups:join' slug=group.slug %}"
+  class='btn btn-lg btn-fill btn-primary'>Join Group</a>
+  <!-- page not done however, will be done in the urls.py -->
+</div>
+{% endblock %}
+
+{% block group_content %}
+<div class="col-md-8">
+  {% if group.post.count == 0 %}
+   <!--checks if the current froup contains post
+ if there is NO post then show message -->
+   <h2>No Post in this group yet</h2>
+   {%else %}
+   <!-- if there is a post, cycle through all the post linked with the current gorup
+ and list them out -->
+   {% for p in group.posts %}
+    {% include "posts/_post.html" %}
+    <!-- while listing the post, per post being iterated the template call -include,
+     injects very common post html code. enabling to practice DRY principle-->
+   {% endfor %}
+
+
+  {% endif %}
+</div>
