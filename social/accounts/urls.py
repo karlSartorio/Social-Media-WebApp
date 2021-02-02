@@ -9,10 +9,10 @@ app_name ='accounts'# this will be the reference text for relative URL
 urlpatterns =[
 path('login/',
     auth_views.LoginView.as_view(template_name='accounts/login.html'),
-    name='login.html'),
+    name='login'),
 path('logout/',
      auth_views.LogoutView.as_view(),
-     name='logout')
+     name='logout'),
 # The two method are how to set up the url mapping for the django onboard
 # login and logout views. we simply call the imported view, set it as_view(),
 # within the parameter we give the template name(direct which tempalate it will
@@ -20,6 +20,6 @@ path('logout/',
 # to the index/home page
 
 path('signup/',
-     views.SignUp.as_view(), name='signup')
+     views.SignUp.as_view(), name='signup'),
 
 ]

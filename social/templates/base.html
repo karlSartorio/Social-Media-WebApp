@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{%load static %}
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -10,10 +11,10 @@
     <!-- goole font - link -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <!-- mastercss link file -->
-    <link rel="stylesheet" href="{%static social/css/master.css%}">
+    <link rel="stylesheet" href="{% static 'social/css/master.css' %}">
   </head>
   <body>
-    <nav class='navbar mynav' role = 'navigation' id="navbar">
+    <nav class='navbar navbar-expand-lg bg-dark mynav' role='navigation' id="navbar">
       <div class="container">
         <a class'navbar-brand mynav' href="{% url 'home' %}">KaySocial</a>
 
@@ -23,7 +24,7 @@
             <li><a href="#">Post</a></li>
             <li><a href="#">Groups</a></li>
             <li><a href="#">Create Group</a></li>
-            <li><a href="{% url 'accounts:logout '%}">Logout</a></li>
+            <li><a href="{% url 'accounts:logout'%}">Logout</a></li>
 
           <!-- now show other options if user not logged in -->
           {% else %}
