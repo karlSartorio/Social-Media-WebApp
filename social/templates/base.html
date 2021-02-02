@@ -1,12 +1,46 @@
 <!DOCTYPE html>
+{%load static %}
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Kay's Social</title>
+    <!-- bootstrap3 theme css link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <!-- bootstrap3 - js link -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- goole font - link -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <!-- mastercss link file -->
+    <link rel="stylesheet" href="{% static 'social/css/master.css' %}">
   </head>
   <body>
-    {% block content %}
+    <nav class='navbar navbar-expand-lg bg-dark mynav' role='navigation' id="navbar">
+      <div class="container">
+        <a class'navbar-brand mynav' href="{% url 'home' %}">KaySocial</a>
 
-    {% endblock %}
+        <ul class='nav navbar-nav navbar-right'>
+          <!-- check if the user is logged in to see nav options -->
+          {% if user.is_authenticated %}
+            <li><a href="#">Post</a></li>
+            <li><a href="#">Groups</a></li>
+            <li><a href="#">Create Group</a></li>
+            <li><a href="{% url 'accounts:logout'%}">Logout</a></li>
+
+          <!-- now show other options if user not logged in -->
+          {% else %}
+            <li><a href="#">Groups</a></li>
+            <li><a href="{%url 'accounts:login'%}">Login</a></li>
+            <li><a href="{%url 'accounts:signup'%}">SignUp</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+    <div class="container mycontent">
+      {% block content %}
+
+      {% endblock %}
+    </div>
+    <!-- link to JS -->
+
   </body>
 </html>

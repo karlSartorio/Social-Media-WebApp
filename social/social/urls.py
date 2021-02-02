@@ -19,5 +19,12 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.HomePage.as_view(), name='home')
+    path('', views.HomePage.as_view(), name='home'),
+    path('accounts/', include('accounts.urls', namespace='accounts')),
+    #connecting to accounts urls.py
+    path('accounts/', include('django.contrib.auth.urls')),
+    #connecting to the onboard auth urls.py for the login, Logout Views and further
+    # authorization
+    path('test/', views.TestPage.as_view(), name='test'),
+    path('thanks', views.thanksPage.as_view(), name='thanks'),
 ]

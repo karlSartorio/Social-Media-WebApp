@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model # returns the user thats currently active
 
 from django.contrib.auth.forms import UserCreationForm # import that django's already build django creation forms.
-'
+
 class UserCreateForm(UserCreationForm):# inhert from the already built form, ensure they dont share the same name
 # description:
 # when the user comes in and ready to sign up, we call 'user creation form' form auth
