@@ -27,12 +27,12 @@ class Group(models.Model):
     #name of the group, only allowing it to be unique no overlapping names
     slug = models.SlugField(allow_unicode=True, unique=True)
     #the slug field, must be unique so that group name and slugs dont overlap each other
-    description = models.TextField(blank=True, default='NOT PROVIDED')
+    description = models.TextField(blank=True, default='')
     # group description attribute, description of group must not be blank
     description_html = models.TextField(editable=False, default='', blank='True')
     #description_html - if we want the html version of the description, also cant be black
     # could be used later.
-    members = models.ManyToManyField(User, through='groupMember')
+    members = models.ManyToManyField(User, through='GroupMember')
 
     def __str__(self):
         return self.name
@@ -55,12 +55,12 @@ class Group(models.Model):
             ordering = ['name']
 
 
-class groupMember(models.Model):
-    group = models.ForeignKey(Group, related_name='memberships')
+class GroupMember(models.Model):
+    group = models.ForeignKey(Group, related_name='memberships', on_delete=models.CASCADE)
     # the member is related to the group class through the ForeignKey
     # whoich we called memberships
 
-    user = models.ForeignKey(User, related_name='user_groups')
+    user = models.ForeignKey(User, related_name='user_groups', on_delete=models.CASCADE)
     #This takes the user that was stated earlier to the script, the current active
     # use. then we get that user and link them to the various groups they belong to and/or
     # have them a member of.
