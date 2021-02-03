@@ -1,0 +1,13 @@
+{% extends 'group/group_base.html' %}
+{% load bootstrap3 %}
+<!-- its a form so we load bootstrap to aid the development -->
+{%block group_content %}
+  <h4>create form</h4>
+  <form action="{url 'group:create'}" method="POST" id='groupForm'>
+    <!-- once user submit send to create page -->
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <!-- inject the form (which is connected from the CreateView)-->
+    <input type="submit" class="btn btn-primary btn-large" value="Create">
+  </form>
+{% endblock %}

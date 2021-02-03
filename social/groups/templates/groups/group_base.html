@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <!-- these block tag wiil be used to inherit to all the other templates
+          in the groups template folder, these different tag will be allow
+          to layout the unique content distinct to the webpage -->
+      {% block pregroup %}
+
+      {% endblock %}
+
+      {% block group_content %}
+
+      {% endblock %}
+
+      {% block postgroup %}
+
+      {% endblock %}
+
+
+    </div>
+
+  </div>
+
+
+{%endblock%}

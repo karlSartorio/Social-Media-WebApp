@@ -1,0 +1,58 @@
+{% extends "groups/group_base.html" %}
+{% block pregroup %}
+  <div class="col-md-4">
+    <div class="content">
+      <!-- if the user logged in and authenticated
+      show a message saying welcome back with a link to the user's
+      profile(containing all thier post), display the current users username-->
+      {% if user.is_authenticated %}
+      <h2>Welcome back!</h2>
+      <a href="{%url 'posts:for_user' username=user.username %}">
+        @{{user.username}}
+      </a>
+      <!-- if not  -->
+      {% endif %}
+      <h2>Groups</h2>
+      <p>Welcome to the Groups page! </p>
+    </div>
+    <!-- if the user is authenticated, give option to create a new group -->
+    {% user.is_authenticated %}
+      <a href="{%url 'group:create'%}" class='btn btn=md btn-fil btn-warning'>
+        Create new Group
+      </a>
+    {%endif%}
+  </div>
+{% endblock %}
+
+{% block group_content %}
+<div class="col-md-8">
+  <div class="lsit-group">
+    {% for group in object_list %}
+    <!-- object list - this is the list of groups object within group.html   -->
+    <a class ='list-group-item' href="{%url 'group:single' slug=group.slug %}">
+      <h3 class='title list-group-item-heading'>{{group.name}}</h3>
+        <!-- have an ancher tag to link to the group name through the slug connection -->
+        <div class="list-group-item container-fluid">
+          {{group.description|safe}}
+          <!-- get the description attribute of the group model and '|safe',
+          allows the use of html code in safe way e.g if something is bold, you
+          see the format instead of seeing the tag -->
+          <div class="row">
+            <!-- the follwoing themeplate tag, is the method of
+              showing how many member and post each group object has in the
+              list of groups -->
+            <div class="col-md-4">
+              <span class ='badge'>{{group.members.count}}</span>
+              member{{group.members.count|pluralized}}
+            </div>
+            <div class="col-md-4">
+              <span class='badge'>{{group.post.count}}</span>
+              post{{group.post.count|pluralized}}
+            </div>
+          </div>
+        </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
