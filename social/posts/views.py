@@ -88,7 +88,7 @@ class CreatePost(LoginRequiredMixin, SelectRelatedMixin, generic.CreateView):
 
 class DeletePost(LoginRequiredMixin, SelectedRelatedMixin, generic.DeleteView):
     # the view that deletes post
-    model = models.post
+    model = models.Post
     select_related = ('user', 'group')
 
     success_url = reverse_lazy('posts:all')
