@@ -1,0 +1,31 @@
+<!-- no need to extends to any base.html, crack right in! -->
+<div class="post-media">
+  <!-- Description:
+this is going to display all the current post message then have the authers username
+underneeth it the message. also have the username link to another page that,
+list out the users post.
+  -->
+  <h3>{{post.message.html|safe}}</h3>
+  <div class="media-body">
+    <strong>{{post.user.username}}</strong>
+    <h5 class='media-heading'>
+      <span class='username'>
+        <a href="{% url post:for_user username=post.user,username %}"></a>
+      </span>
+    <time class='time'>
+      <!-- able to show the timedate the post was created at -->
+      <a href="{% url 'post:single' username=post.user.username pk=post.pk %}"></a>
+    </time>
+    </h5>
+    <div class="media-footer">
+      {# now give the option to delete post #}
+      {% if user.is_authenicated and post.user == user %}
+      <a href="{% url 'post:delete' pk=post.pk %}" title='delete' class='btn btn-simple'></a>
+      {# give a link to the delete post with the post corresponf pk #}
+      <span class="fa fa-remove text-danger" aria-hidden="true"></span>
+      <span class="text-danger icon-label">Delete</span>
+      {% endif %}
+    </div>
+  </div>
+
+</div>
