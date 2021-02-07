@@ -1,0 +1,46 @@
+{%extends 'post/post_base.html'%}
+{% pre_post_content %}
+<div class="col-md-4">
+  {% if request.user.is_authenicated %}
+  <div class="card card-with-shadow">
+    <div class="content">
+      <h5 class='title'>Your Groups</h5>
+      <ul class='list-unstyled'>
+        {% for member_group in get_user_groups%}
+        <!-- this is form the models.py in teh model app, that it a foriegn key
+      all the a link from post to the group memeber - if your user, for every Group
+      the user is a member of... -->
+      <li clas='group li-with-bullet'>
+        <a href="{% url 'group:single' slug=member_group.group.slug %}"></a>
+        <!-- grab all the member's join group and the group.slug  -->
+      </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  {%end if%}
+  <div class="card card-with-shadow">
+    <div class="content">
+      <h5 class='title'>all Groups</h5>
+      <ul class='list-unstyled'>
+        <!-- list out all the groups the user is not a member to -->
+        {% for other in get_other_groups %}
+        <li class="group li-with-bullet">
+          <a href="{% url'group:single' slug=other_group.slug %}"></a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block post_content %}
+<div class="col-md-8">
+  <!-- injecting all the post  -->
+  {% for post in post_list %}
+    {% include 'post/_post.html'%}
+    <!-- inject a file full of html code file, iteratively  -->
+  {% endfor %}
+</div>
+{% endblock %}
